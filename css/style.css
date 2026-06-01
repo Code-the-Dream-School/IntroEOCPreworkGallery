@@ -1,0 +1,473 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:            #0b1120;
+  --surface:       #111d35;
+  --surface2:      #172444;
+  --border:        rgba(173, 216, 255, 0.08);
+  --border-hover:  rgba(173, 216, 255, 0.18);
+
+  --accent:        #f4a020;       /* orange */
+  --accent-dim:    rgba(244,160,32,0.10);
+  --accent-alt:    #d4a832;       /* goldenrod */
+  --accent-alt-dim:rgba(212,168,50,0.10);
+
+  --highlight:     #7ec8f0;       /* light blue */
+  --highlight-dim: rgba(126,200,240,0.10);
+
+  --navy:          #1a2f55;
+
+  --text:          #e8f2fb;
+  --text-muted:    rgba(232,242,251,0.45);
+  --text-dim:      rgba(232,242,251,0.22);
+
+  --panel-w:       300px;
+  --header-h:      56px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+
+header {
+  height: var(--header-h);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  background: var(--surface);
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mark svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--accent);
+}
+
+header h1 {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.header-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.count-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(244,160,32,0.30);
+  border-radius: 4px;
+  padding: 2px 8px;
+  letter-spacing: 0.04em;
+}
+
+/* ── MAIN LAYOUT ── */
+
+.main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── LEFT PANEL ── */
+
+.panel {
+  width: var(--panel-w);
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+.panel-header {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.panel-heading {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  padding: 0 4px;
+}
+
+.panel-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.panel-list::-webkit-scrollbar { width: 4px; }
+.panel-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* ── SKETCH ITEMS ── */
+
+.sketch-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+  margin-bottom: 2px;
+}
+
+.sketch-item:hover {
+  background: var(--surface2);
+  border-color: var(--border-hover);
+}
+
+.sketch-item.active {
+  background: var(--accent-dim);
+  border-color: rgba(244,160,32,0.28);
+}
+
+.sketch-thumb {
+  width: 52px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #080e1d;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.sketch-thumb iframe {
+  width: 300%;
+  height: 300%;
+  transform: scale(0.333);
+  transform-origin: top left;
+  pointer-events: none;
+  border: none;
+}
+
+.sketch-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.sketch-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sketch-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sketch-item.active .sketch-label {
+  color: var(--accent);
+}
+
+.sketch-sublabel {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.play-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.sketch-item:hover .play-icon,
+.sketch-item.active .play-icon {
+  opacity: 1;
+}
+
+.play-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent);
+}
+
+/* ── RIGHT STAGE ── */
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.stage-empty .big-icon {
+  width: 64px;
+  height: 64px;
+  stroke: var(--highlight);
+  fill: none;
+  stroke-width: 0.8;
+  opacity: 0.35;
+}
+
+.stage-empty p {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+.stage-content {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  gap: 16px;
+}
+
+.stage-content.visible {
+  display: flex;
+}
+
+/* ── STAGE TOP BAR ── */
+
+.stage-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.stage-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--accent-alt);
+  letter-spacing: 0.07em;
+}
+
+.stage-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stage-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--highlight);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.75;
+}
+
+.hint-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--highlight);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* ── NAV BUTTONS ── */
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border-hover);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.nav-btn:disabled {
+  opacity: 0.22;
+  cursor: default;
+}
+
+.nav-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ── STAGE FRAME ── */
+
+.stage-frame {
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--navy);
+  background: #080e1d;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(126,200,240,0.06) inset;
+}
+
+.stage-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── COUNTER ── */
+
+.stage-counter {
+  position: absolute;
+  bottom: 36px;
+  right: 40px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  pointer-events: none;
+}
+
+/* ── LOADING STATE ── */
+
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-alt));
+  border-radius: 0 2px 2px 0;
+  transition: width 0.4s ease;
+  pointer-events: none;
+}
+
+.loading-bar.active {
+  animation: load-sweep 1.2s ease-in-out infinite;
+}
+
+@keyframes load-sweep {
+  0%   { width: 0%;   left: 0; }
+  50%  { width: 60%;  left: 20%; }
+  100% { width: 0%;   left: 100%; }
+}
+
+/* ── ERROR STATE ── */
+
+.error-state {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg);
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.error-state.visible {
+  display: flex;
+}
+
+/* ── DIVIDER IN PANEL ── */
+
+.panel-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 12px;
+}
