@@ -1,6 +1,6 @@
 /* gallery.js — loads sketches.csv and drives the student gallery */
 
-const CSV_PATH = 'data/sketches.csv';
+const CSV_PATH = 'data/Intro262PreWorks.csv';
 
 let sketches = [];
 let activeIndex = -1;
