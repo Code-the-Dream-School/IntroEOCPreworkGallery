@@ -156,14 +156,14 @@ header h1 {
 
 .sketch-item {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  flex-direction: column;
+  padding: 0;
   border-radius: 8px;
   cursor: pointer;
   border: 1px solid transparent;
   transition: background 0.15s, border-color 0.15s;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
+  overflow: hidden;
 }
 
 .sketch-item:hover {
@@ -177,21 +177,22 @@ header h1 {
 }
 
 .sketch-thumb {
-  width: 52px;
-  height: 40px;
-  border-radius: 5px;
+  width: 100%;
+  height: 160px;
+  border-radius: 0;
   overflow: hidden;
   flex-shrink: 0;
   background: #080e1d;
-  border: 1px solid var(--border);
+  border: none;
   position: relative;
 }
 
 .sketch-thumb iframe {
   width: 300%;
-  height: 300%;
+  height: calc(300% + 45px);
   transform: scale(0.333);
   transform-origin: top left;
+  margin-top: -15px;
   pointer-events: none;
   border: none;
 }
@@ -203,8 +204,8 @@ header h1 {
 }
 
 .sketch-info {
-  flex: 1;
-  min-width: 0;
+  padding: 5px 10px;
+  flex: none;
 }
 
 .sketch-label {
@@ -229,11 +230,7 @@ header h1 {
 }
 
 .play-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  opacity: 0;
-  transition: opacity 0.15s;
+  display: none;
 }
 
 .sketch-item:hover .play-icon,
@@ -400,7 +397,8 @@ header h1 {
 
 .stage-frame iframe {
   width: 100%;
-  height: 100%;
+  height: calc(100% + 45px);
+  margin-top: -45px;
   border: none;
   display: block;
 }
